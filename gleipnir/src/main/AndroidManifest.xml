@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Gleipnir Attack POC - Exploiting the Android process share feature
+  ~ Copyright (C) <2020>  <Sascha Roth>
+  ~
+  ~ This program is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License along
+  ~ with this program; if not, write to the Free Software Foundation, Inc.,
+  ~ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.gleipnir.app">
+    <!-- MIGROS APP -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="com.huawei.gallery.permission.GALLERY_PROVIDER" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <!--
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+	<uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+    -->
+    <!-- Keeps the processor from sleeping when a message is received. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- This app has permission to register and receive data message. -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- END MIGROS APP -->
+    <!-- mPower -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+        </intent>
+    </queries>
+
+    <application
+        >
+
+
+        <activity android:name=".Hacktivity"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+<!--
+        <activity android:name=".Trampoline"
+            android:process=":trampoline"
+            android:theme="@style/Theme.Transparent"
+            android:taskAffinity="org.gleipnir.trampoline"
+            >
+        </activity>-->
+
+        <!-- MULTI TASKING -->
+        <activity android:name=".Trampoline1"
+            android:process=":trampoline1"
+            android:theme="@style/Theme.Transparent"
+            android:taskAffinity="org.gleipnir.trampoline1"
+            >
+        </activity>
+        <activity android:name=".Trampoline2"
+            android:process=":trampoline2"
+            android:theme="@style/Theme.Transparent"
+            android:taskAffinity="org.gleipnir.trampoline2"
+            >
+        </activity>
+        <activity android:name=".Trampoline3"
+            android:process=":trampoline3"
+            android:theme="@style/Theme.Transparent"
+            android:taskAffinity="org.gleipnir.trampoline3"
+            >
+        </activity>
+        <activity android:name=".Trampoline4"
+            android:process=":trampoline4"
+            android:theme="@style/Theme.Transparent"
+            android:taskAffinity="org.gleipnir.trampoline4"
+            >
+        </activity>
+        <activity android:name=".Trampoline5"
+            android:process=":trampoline5"
+            android:theme="@style/Theme.Transparent"
+            android:taskAffinity="org.gleipnir.trampoline5"
+            >
+        </activity>
+        <activity android:name=".Trampoline6"
+            android:process=":trampoline6"
+            android:theme="@style/Theme.Transparent"
+            android:taskAffinity="org.gleipnir.trampoline6"
+            >
+        </activity>
+        <!-- MULTI TASKING END -->
+
+        <activity android:name=".Plugtivity"
+            >
+        </activity>
+
+        <activity android:name="org.gleipnir.app.Logtivity"/>
+
+        <service
+            android:name="com.gleipnir.HackJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+    </application>
+
+</manifest>

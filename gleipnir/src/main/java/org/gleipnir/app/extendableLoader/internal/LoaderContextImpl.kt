@@ -36,6 +36,7 @@ import android.util.Log
 import android.view.ContextThemeWrapper
 import org.gleipnir.app.R
 import org.gleipnir.app.extendableLoader.*
+import org.gleipnir.app.extendableLoader.ApplicationPaths.Companion.buildDataDir
 import org.gleipnir.app.helpers.*
 import org.gleipnir.app.helpers.binder.BinderHook
 import org.gleipnir.app.helpers.extensions.*
@@ -44,7 +45,6 @@ import org.gleipnir.app.reflectionHelper.getReflective
 import org.gleipnir.app.reflectionHelper.setReflective
 import org.gleipnir.app.security.KeystorePatcher
 import java.io.File
-import java.lang.reflect.Method
 
 /**
  * This is the core implementation of the Attack.
@@ -213,7 +213,7 @@ class LoaderContextImpl : LoaderContext {
         )
 
         paths.dataDir =
-            File(hostActivity.filesDir.absolutePath + "/" + targetPackageInfo.packageName)
+            buildDataDir(hostActivity, targetPackageInfo.packageName)
         paths.dataDir.mkdirs()
         paths.protectedDir =
             File(hostActivity.filesDir.absolutePath + "/" + targetPackageInfo.packageName + "/prot/")

@@ -77,6 +77,11 @@
             >
         </activity>-->
 
+
+        <activity android:name=".AppDetailsActivity"
+            >
+        </activity>
+
         <!-- MULTI TASKING -->
         <activity android:name=".Trampoline1"
             android:process=":trampoline1"

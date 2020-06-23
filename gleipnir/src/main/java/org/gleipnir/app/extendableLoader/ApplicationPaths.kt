@@ -19,6 +19,7 @@
 
 package org.gleipnir.app.extendableLoader
 
+import android.content.Context
 import java.io.File
 
 class ApplicationPaths {
@@ -27,4 +28,10 @@ class ApplicationPaths {
     var dataDir: File = File("")
     var protectedDir: File = File("")
     var resourceApks = ArrayList<String>()
+
+    companion object {
+        fun buildDataDir(context: Context, packageName: String): File {
+            return File(context.filesDir.absolutePath + "/" + packageName)
+        }
+    }
 }

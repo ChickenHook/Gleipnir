@@ -133,10 +133,10 @@ class Hacktivity : Activity() {
         Thread {
             items.clear()
             apps.forEachIndexed { i, package_info ->
-                val it=package_info.applicationInfo
+                val it = package_info.applicationInfo
                 var item = AppListItem()
                 item.label = it.loadLabel(packageManager).toString()
-                Log.d("Hacktivity","Label ${item.label}")
+                Log.d("Hacktivity", "Label ${item.label}")
                 item.drawable = it.loadIcon(packageManager)
                 item.name = it.name
                 item.appInfo = it
@@ -196,6 +196,14 @@ class Hacktivity : Activity() {
                                 launchApplication(items[i].appInfo!!)
                             }
                         }
+                    }
+
+                    it.setOnItemLongClickListener { parent, view, position, id ->
+
+                        val intent = Intent(this@Hacktivity, AppDetailsActivity::class.java)
+                        intent.putExtra(AppDetailsActivity.EXTRA_APP, items[position].appInfo!!)
+                        startActivity(intent)
+                        true
                     }
 
                 }

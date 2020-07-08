@@ -30,7 +30,6 @@ import android.widget.TextView
 import org.gleipnir.app.extendableLoader.IPlugin
 import org.gleipnir.app.plugins.FridaPlugin
 import org.gleipnir.app.plugins.Input2Toast
-import org.gleipnir.app.plugins.mPowerPlugin
 import java.util.concurrent.CopyOnWriteArrayList
 
 /**
@@ -50,8 +49,7 @@ class Plugtivity : Activity() {
          */
         val pluginsList = arrayListOf<() -> IPlugin>(
             ::FridaPlugin,
-            ::Input2Toast,
-            ::mPowerPlugin
+            ::Input2Toast
         )
 
         val enabledPlugins = CopyOnWriteArrayList<IPlugin>()

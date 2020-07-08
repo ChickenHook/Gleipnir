@@ -39,6 +39,7 @@ import org.gleipnir.app.extendableLoader.*
 import org.gleipnir.app.extendableLoader.ApplicationPaths.Companion.buildDataDir
 import org.gleipnir.app.helpers.*
 import org.gleipnir.app.helpers.binder.BinderHook
+import org.gleipnir.app.helpers.binder.BinderProxyHook
 import org.gleipnir.app.helpers.extensions.*
 import org.gleipnir.app.reflectionHelper.getDeclaredMethod
 import org.gleipnir.app.reflectionHelper.getReflective
@@ -581,6 +582,11 @@ class LoaderContextImpl : LoaderContext {
                     plugins.forEach {
                         it.onPreCreateActivity(this@LoaderContextImpl, activity)
                     }
+
+                    //update hooks
+                    BinderProxyHook.updateContextBasedHooks(activity);
+
+                    // patch resources and activity info
                     getActivityInfoForActivity(newActivity)?.let {
                         log(
                             "LoaderContextImpl [-] ActivityObserver [-] hack activity: $newActivity with theme <${it.themeResource}>"

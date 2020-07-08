@@ -117,6 +117,8 @@ object BinderHook {
             log("BinderHook [-] installHooks [-] unable to get AppOpsManager")
         }
 
+        BinderProxyHook.installHooks(context)
+
     }
 
     fun addHook(

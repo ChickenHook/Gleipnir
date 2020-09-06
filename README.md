@@ -53,12 +53,13 @@ Gleipnir attack can be used via different ways:
 
 2) Start Gleipnir "Demo App"
 
-<img src="metadata/android/en-US/images/phoneScreenshots/select_target_app.png" width="400">
-
-
 3) Select plugins to be enabled (optional)
 
+=> If you enable the frida plugin please have a look at the [Enable frida-plugin](#enable-frida-plugin) chapter. If enabled Gleipnir will wait for frida to be connected after clicking on the target App icon.
+
 4) Select App to be started via Gleipnir
+
+<img src="metadata/android/en-US/images/phoneScreenshots/select_target_app.png" width="400">
 
 (Now you can have a second instance of the App as well as you can connect frida and debugger, ...)
 

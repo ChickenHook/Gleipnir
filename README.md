@@ -15,7 +15,51 @@ But some disadvantages have to be mentioned:
 * *Runtime only* - The Gleipnir Attack is a Runtime only attack and thus depends on the Android implementation. New Android versions may require migration.
 * *No code changes - Potentially it's not possible to just modify code of the victim App. Hooking or Reflection can be used to manipulate the behaviour.
 
-## Requirements
+## Usage
+
+Gleipnir attack can be used via different ways:
+
+* Library
+* "Demo" App
+* Python cli
+
+## Other Apps
+
+Gleipnir - VM (WIP)
+
+## Python cli
+
+[...]
+
+## Library integration
+
+You can easily integrate gleipnir into you're project.
+
+
+Just include the maven repository
+
+1) In your root build.gradle:
+```groovy
+allprojects {
+        repositories {
+            [..]
+            jcenter()
+            maven { url "https://jitpack.io" }
+        }
+   }
+```
+2) In your library/build.gradle add:
+```groovy
+   dependencies {
+        implementation 'com.github.ChickenHook:Gleipnir:1.0'
+   }
+```
+
+## App usage
+
+[...]
+
+## Build Requirements
 Android Studio: 3.6.1
 
 Android Versions: 26 - 30 (preview 3)

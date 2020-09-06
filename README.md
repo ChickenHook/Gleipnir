@@ -2,8 +2,22 @@
 
 <img src="metadata/android/en-US/images//icon.png" width="200">
 
+# Table of Contents
+* [Description](#description)
+* [Paper](#paper)
+* [Usage](#usage)
+    * [App usage](#app-usage)
+    * [Python usage](#python-usage)
+    * [Verbose mode](#verbose-mode)
+    * [Library integration](#library-integration)
+    * [Other apps](#other-apps)
+* [Build](#build)
+* [Test](#test)
+* [Create Plug-Ins](#create-plug-ins)
+* [Enable frida-plugin](#enable-frida-plugin)
+* [Other projects](#other-projects)
 
-## Introduction
+## <a name="description"/> Description
 
 Gleipnir introduces a new Attack which is able to execute third party Apps dynamically at Runtime. Instead of extract the victim App, modify it and deploy with a different signing key, this threat loads the full unmodified victim App in a compromised process owned by the attacker. This offers the chance to apply reflection or hooking actions without the need having root access.
 Real users could install such an App tainted as classical Launcher App for example and the full potential of this threat could be applied. Obtain user's personal information, credentials, manipulate transactions or Advertising identifiers to let the Attacker earn the clicks produced by the user playing Games or familiar Apps are some of the goals possible to reach.
@@ -18,21 +32,22 @@ But some disadvantages have to be mentioned:
 * *Runtime only* - The Gleipnir Attack is a Runtime only attack and thus depends on the Android implementation. New Android versions may require migration.
 * *No code changes - Potentially it's not possible to just modify code of the victim App. Hooking or Reflection can be used to manipulate the behaviour.
 
-## Usage
+## <a name="paper"/> Download paper
+
+Download [here](doc/Gleipnir.pdf)
+
+##  <a name="usage"/>  Usage
 
 Gleipnir attack can be used via different ways:
 
-* Library
+* Android Library
 * "Demo" App
 * Python cli
 
-## Other Apps
-
-Gleipnir - VM (WIP)
 
 
 
-## App usage
+### <a name="app-usage"/>  App usage
 
 1) First download the demo apk here:
 
@@ -48,11 +63,11 @@ Gleipnir - VM (WIP)
 (Now you can have a second instance of the App as well as you can connect frida and debugger, ...)
 
 
-## Python cli
+### <a name="python-usage"/> A Python cli
 
 [...] (WIP)
 
-## Library integration
+### <a name="library-integration"/> Library integration
 
 You can easily integrate gleipnir into you're project.
 
@@ -77,12 +92,18 @@ allprojects {
 ```
 
 
-## Build Requirements
+### <a name="other-apps"/>  Other Apps
+
+Gleipnir - VM (WIP)
+
+
+## <a name="build"/> Build
+
+
+### Build Requirements
 Android Studio: 3.6.1
 
 Android Versions: 26 - 30 (preview 3)
-
-## Compile
 
 #### Gradle
 ```
@@ -92,7 +113,7 @@ gradle :gleipnir:assemble
 
 Launch gleipnir Run Configuration
 
-## Test
+## <a name="test"/>  Test
 
 Along with this project the sumbodul testVictim is provided.
 This App can be used to test the gleipnir attack.
@@ -104,7 +125,7 @@ This App can be used to test the gleipnir attack.
 5. Launch the Gleipnir App
 6. Select the Test Victim App
 
-## Create Plug-Ins
+## <a name="create-plug-ins"/>  Create Plug-Ins
 
 The Interface IPlugin.kt can be implemented in order to create
 extensions for the Gleipnir App.
@@ -122,7 +143,7 @@ located in the Plugtivity class. Just add the Plug-In constructor to
 pluginsList
 ```
 
-## Enable the frida Plug-In (OPTIONAL)
+## <a name="enable-frida-plugin"/>  Enable the frida Plug-In (OPTIONAL)
 
 In order to enable the frida Plug-In you have to insert frida gadget
 libraries into the
@@ -130,3 +151,17 @@ libraries into the
 gleipnir/src/main/jniLibs/[arch]/libfrida-gadget.so
 ```
 folder(s). You can rename this file just have a look at FridaPlugin.kt
+
+## <a name="other-projects"/> Other Projects
+
+| Project | Description |
+|---------|-------------|
+| [ChickenHook](https://github.com/ChickenHook/ChickenHook) | A linux / android / MacOS hooking framework  |
+| [BinderHook](https://github.com/ChickenHook/BinderHook) | Library intended to hook Binder interface and manipulate events |
+| [RestrictionBypass](https://github.com/ChickenHook/RestrictionBypass) |  Android API restriction bypass for all Android Versions |
+| [AndroidManifestBypass](https://github.com/ChickenHook/AndroidManifestBypass) |  Android API restriction bypass for all Android Versions |
+| .. | |
+
+## Sponsor
+
+If you're happy with my library please order me a cup of coffee ;) Thanks.

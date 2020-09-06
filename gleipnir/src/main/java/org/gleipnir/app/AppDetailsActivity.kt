@@ -20,17 +20,20 @@ import java.net.URLConnection
 class AppDetailsActivity : Activity() {
 
     companion object {
+        const val EXTRA_PROFILE = "extra_profile";
         const val EXTRA_APP = "extra_app";
         const val TAG = "AppDetailsActivity"
     }
 
     private val IMPORT_CHOOSER = 0
     private val EXPORT_CHOOSER = 1
+    private var profile = ""
     lateinit var mAppInfo: ApplicationInfo
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_app_details)
         intent?.let { it ->
+            profile = it.getStringExtra(EXTRA_PROFILE) ?: ""
             it.getParcelableExtra<ApplicationInfo>(EXTRA_APP)?.let { appInfo ->
                 mAppInfo = appInfo
                 findViewById<ImageView>(R.id.activity_app_details_icon)?.setImageDrawable(
@@ -83,7 +86,7 @@ class AppDetailsActivity : Activity() {
     fun writeExport(info: ApplicationInfo): File? {
         getExternalFilesDir(null)?.let {
             val output = File(it.absolutePath + File.separator + info.packageName + "_data.zip")
-            val input = ApplicationPaths.buildDataDir(this, info.packageName)
+            val input = ApplicationPaths.buildDataDir(this, info.packageName, profile)
             ApkZipHelper.zipIt(output, input)
             showToast("Exported to: ${output.absolutePath}")
             return output
@@ -92,7 +95,7 @@ class AppDetailsActivity : Activity() {
     }
 
     fun writeImport(info: ApplicationInfo, input: InputStream) {
-        val dest = ApplicationPaths.buildDataDir(this, info.packageName)
+        val dest = ApplicationPaths.buildDataDir(this, info.packageName, profile)
         ApkZipHelper.unzip(input, dest)
         showToast("Imported to: ${dest.absolutePath}")
     }

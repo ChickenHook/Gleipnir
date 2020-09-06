@@ -210,6 +210,9 @@ class Hacktivity : Activity() {
 
                         val intent = Intent(this@Hacktivity, AppDetailsActivity::class.java)
                         intent.putExtra(AppDetailsActivity.EXTRA_APP, items[position].appInfo!!)
+                        loadProfile(this)?.let {
+                            intent.putExtra(AppDetailsActivity.EXTRA_PROFILE, it)
+                        }
                         startActivity(intent)
                         true
                     }

@@ -88,7 +88,7 @@ allprojects {
 2) In your library/build.gradle add:
 ```groovy
    dependencies {
-        implementation 'com.github.ChickenHook:Gleipnir:1.2'
+        implementation 'com.github.ChickenHook:Gleipnir:1.3'
    }
 ```
 

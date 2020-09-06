@@ -22,8 +22,8 @@ package org.gleipnir.app
 import android.app.Activity
 import android.content.pm.PackageInfo
 import android.os.Bundle
-import org.gleipnir.app.extendableLoader.IPlugin
 import org.gleipnir.app.extendableLoader.GleipnirLoader
+import org.gleipnir.app.extendableLoader.IPlugin
 
 /**
  * The Activity Trampoline.
@@ -37,6 +37,7 @@ import org.gleipnir.app.extendableLoader.GleipnirLoader
 open class Trampoline : Activity() {
 
     companion object {
+        const val EXTRA_PROFILE = "extra_profile"
         const val TARGET_APPLICATION = "TARGET_APPLICATION"
         const val PLUGINS = "PLUGINS"
         var currentTrampoline: Trampoline? = null
@@ -48,8 +49,10 @@ open class Trampoline : Activity() {
         setContentView(R.layout.trampoline_layout)
         val targetApplication = intent.getParcelableExtra(TARGET_APPLICATION) as PackageInfo?
         val plugins = intent.getSerializableExtra(PLUGINS) as List<IPlugin>?
+        val profile = intent.extras?.getString(EXTRA_PROFILE) ?: ""
+
         targetApplication?.let {
-            launch(it, plugins)
+            launch(it, plugins, profile)
         }
     }
 
@@ -58,13 +61,15 @@ open class Trampoline : Activity() {
      *
      * @param packageInfo the App to be started
      * @param plugins the plugins to be used
+     * @param profile the plugins to be used
      */
-    fun launch(packageInfo: PackageInfo, plugins: List<IPlugin>?) {
+    fun launch(packageInfo: PackageInfo, plugins: List<IPlugin>?, profile: String) {
         val pluginsToUse = plugins ?: arrayListOf()
         GleipnirLoader.loadAndStartAsync(
             this@Trampoline,
             pluginsToUse,
-            packageInfo
+            packageInfo,
+            profile
         ) {
             //this@Trampoline.finish()
         }

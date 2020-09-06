@@ -29,11 +29,13 @@ interface ILoader {
      * @param hostActivity The host activity (a Gleipnir Activity)
      * @param plugins list of enabled Plug-Ins
      * @param targetApplication the PackageInfo of the target Application
+     * @param profile can be empty or specifies a profile used as path for file data (allows multiple data dirs / data instances)
      */
     fun loadAndStart(
         hostActivity: Activity,
         plugins: List<IPlugin>,
-        targetApplication: PackageInfo
+        targetApplication: PackageInfo,
+        profile: String
     ): Boolean
 
     /**
@@ -43,11 +45,13 @@ interface ILoader {
      * @param plugins list of enabled Plug-Ins
      * @param targetApplication the PackageInfo of the target Application
      * @param onFinish callback to be triggered when start process has finished
+     * @param profile can be empty or specifies a profile used as path for file data (allows multiple data dirs / data instances)
      */
     fun loadAndStartAsync(
         hostActivity: Activity,
         plugins: List<IPlugin>,
         targetApplication: PackageInfo,
+        profile: String,
         onFinish: () -> Unit
     ): Boolean
 

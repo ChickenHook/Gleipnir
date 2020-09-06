@@ -71,9 +71,11 @@ class LoaderContextImpl : LoaderContext {
     override fun attach(
         hostActivity: Activity,
         plugins: List<IPlugin>,
-        packageInfo: PackageInfo
+        packageInfo: PackageInfo,
+        profile: String
     ) {
-        log("LoaderContextImpl [-] attach [-] attached with ${plugins.size} plugins")
+        log("LoaderContextImpl [-] attach [-] attached with ${plugins.size} plugins and profile ${profile}")
+        this.paths.profile = profile
         this.hostActivity = hostActivity
         this.plugins = plugins
         this.hostApplicationInfo = ApplicationInfo(hostActivity.applicationInfo)
@@ -214,7 +216,7 @@ class LoaderContextImpl : LoaderContext {
         )
 
         paths.dataDir =
-            buildDataDir(hostActivity, targetPackageInfo.packageName)
+            buildDataDir(hostActivity, targetPackageInfo.packageName, paths.profile)
         paths.dataDir.mkdirs()
         paths.protectedDir =
             File(hostActivity.filesDir.absolutePath + "/" + targetPackageInfo.packageName + "/prot/")
@@ -633,16 +635,20 @@ class LoaderContextImpl : LoaderContext {
                         }
                         if (themeToSet != 0) {
                             log(
-                                "LoaderContextImpl [-] ActivityObserver [-] hack activity: $newActivity set theme $themeToSet (${activity.resources.getResourceEntryName(
-                                    themeToSet
-                                )})>"
+                                "LoaderContextImpl [-] ActivityObserver [-] hack activity: $newActivity set theme $themeToSet (${
+                                    activity.resources.getResourceEntryName(
+                                        themeToSet
+                                    )
+                                })>"
                             )
                             newActivity.setTheme(it.themeResource)
                             Log.d(
                                 "LoaderContextImpl",
-                                "LoaderContextImpl [-] got resource ${newActivity.resources.getResourceEntryName(
-                                    themeToSet
-                                )}"
+                                "LoaderContextImpl [-] got resource ${
+                                    newActivity.resources.getResourceEntryName(
+                                        themeToSet
+                                    )
+                                }"
                             )
                         }
 

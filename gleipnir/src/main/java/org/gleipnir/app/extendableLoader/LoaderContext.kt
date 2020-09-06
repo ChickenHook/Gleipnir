@@ -33,7 +33,8 @@ interface LoaderContext {
     fun attach(
         hostActivity: Activity,
         plugins: List<IPlugin>,
-        packageInfo: PackageInfo
+        packageInfo: PackageInfo,
+        profile: String
     )
 
     /**
@@ -61,4 +62,5 @@ interface LoaderContext {
      * Get target package info (patched)
      */
     fun getTargetPackgeInfo(): PackageInfo
+
 }

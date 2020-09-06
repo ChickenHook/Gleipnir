@@ -51,6 +51,9 @@ class Hacktivity : Activity() {
     lateinit var animationDrawable: AnimationDrawable
 
     companion object {
+
+        const val EXTRA_PROFILE = "extra_profile"
+
         /**
          * List of available trampolines.
          *
@@ -111,6 +114,11 @@ class Hacktivity : Activity() {
             animationDrawable.setEnterFadeDuration(5000)
             animationDrawable.setExitFadeDuration(2000)
         }
+
+    }
+
+    fun loadProfile(activity: Activity): String? {
+        return activity.intent?.extras?.getString(EXTRA_PROFILE)
     }
 
 
@@ -235,7 +243,9 @@ class Hacktivity : Activity() {
         )
         trampolineIntent.putExtra(Trampoline.TARGET_APPLICATION, packageInfo)
         trampolineIntent.putExtra(Trampoline.PLUGINS, Plugtivity.enabledPlugins)
-
+        loadProfile(this)?.let {
+            trampolineIntent.putExtra(Trampoline.EXTRA_PROFILE, it)
+        }
         killTrampoline()
         startActivity(trampolineIntent)
     }

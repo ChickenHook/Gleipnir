@@ -33,21 +33,25 @@ import java.io.File
 object GleipnirLoader : ILoader {
 
     val baseLoaderContext: LoaderContext = LoaderContextImpl() // default impl
+
     /**
      * Load and start the given App represented by the PackageInfo
      *
      * @param hostActivity The host activity (a Gleipnir Activity)
      * @param plugins list of enabled Plug-Ins
      * @param targetApplication the PackageInfo of the target Application
+     * @param profile can be empty or specifies a profile used as path for file data (allows multiple data dirs / data instances)
      */
     override fun loadAndStart(
         hostActivity: Activity,
         plugins: List<IPlugin>,
-        targetApplication: PackageInfo
+        targetApplication: PackageInfo,
+        profile: String
     ): Boolean {
         log("Loader [-] loadAndStart application $targetApplication with hostActivity $hostActivity")
-        return handleLoadAndStart(hostActivity, plugins, targetApplication);
+        return handleLoadAndStart(hostActivity, plugins, targetApplication, profile);
     }
+
     /**
      * Load and start the given App represented by the PackageInfo
      *
@@ -55,12 +59,14 @@ object GleipnirLoader : ILoader {
      * @param plugins list of enabled Plug-Ins
      * @param targetApplication the PackageInfo of the target Application
      * @param onFinish callback to be triggered when start process has finished
+     * @param profile can be empty or specifies a profile used as path for file data (allows multiple data dirs / data instances)
      */
     override fun loadAndStartAsync(
         hostActivity: Activity,
         plugins: List<IPlugin>,
         targetApplication: PackageInfo,
-        onFinish: () -> Unit
+        onFinish: () -> Unit,
+        profile: String
     ): Boolean {
         log("Loader [-] loadAndStart application $targetApplication with hostActivity $hostActivity")
         // we initialize the webview right before we start the victim App.
@@ -72,11 +78,12 @@ object GleipnirLoader : ILoader {
             //SystemClock.sleep(1000)
             log("Hacktivity [-] start target appliation")
             // use queue?
-            handleLoadAndStart(hostActivity, plugins, targetApplication)
+            handleLoadAndStart(hostActivity, plugins, targetApplication, profile)
             onFinish()
         }.start()
         return true
     }
+
     /**
      * The loader context representing all necessary elements of the Attack
      */
@@ -90,10 +97,11 @@ object GleipnirLoader : ILoader {
     fun handleLoadAndStart(
         hostActivity: Activity,
         plugins: List<IPlugin>,
-        targetApplication: PackageInfo
+        targetApplication: PackageInfo,
+        profile: String
     ): Boolean {
         log("Loader [-] attach to target application")
-        baseLoaderContext.attach(hostActivity, plugins, targetApplication)
+        baseLoaderContext.attach(hostActivity, plugins, targetApplication, profile)
         log("Loader [-] bind application")
         baseLoaderContext.bind()
         log("Loader [-] prepare android stack")
@@ -124,7 +132,7 @@ object GleipnirLoader : ILoader {
     /**
      * Initialize the WebView
      */
-    private fun initWebView(context: Context){
+    private fun initWebView(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             val processName = getProcessName(context)
             val packageName: String = context.getPackageName()

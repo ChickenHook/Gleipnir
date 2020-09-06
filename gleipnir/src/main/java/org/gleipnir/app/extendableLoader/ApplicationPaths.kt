@@ -28,10 +28,15 @@ class ApplicationPaths {
     var dataDir: File = File("")
     var protectedDir: File = File("")
     var resourceApks = ArrayList<String>()
+    var profile = ""
 
     companion object {
-        fun buildDataDir(context: Context, packageName: String): File {
-            return File(context.filesDir.absolutePath + "/" + packageName)
+        fun buildDataDir(context: Context, packageName: String, profile: String): File {
+            return File(context.filesDir.absolutePath + "/" + profile + "/" + packageName)
+        }
+
+        fun buildProtectedDir(context: Context, packageName: String, profile: String): File {
+            return File(context.filesDir.absolutePath + "/" + profile + "/" + packageName + "/prot/")
         }
     }
 }

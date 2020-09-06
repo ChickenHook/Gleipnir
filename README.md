@@ -64,7 +64,7 @@ Gleipnir attack can be used via different ways:
 (Now you can have a second instance of the App as well as you can connect frida and debugger, ...)
 
 
-### <a name="python-usage"/> A Python cli
+### <a name="python-usage"/> Python cli
 
 [...] (WIP)
 

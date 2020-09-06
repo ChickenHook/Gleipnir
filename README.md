@@ -1,5 +1,8 @@
 # Gleipnir - Attack POC
 
+<img src="metadata/android/en-US/images//icon.png" width="200">
+
+
 ## Introduction
 
 Gleipnir introduces a new Attack which is able to execute third party Apps dynamically at Runtime. Instead of extract the victim App, modify it and deploy with a different signing key, this threat loads the full unmodified victim App in a compromised process owned by the attacker. This offers the chance to apply reflection or hooking actions without the need having root access.
@@ -27,9 +30,27 @@ Gleipnir attack can be used via different ways:
 
 Gleipnir - VM (WIP)
 
+
+
+## App usage
+
+1) First download the demo apk here:
+
+2) Start Gleipnir "Demo App"
+
+<img src="metadata/android/en-US/images/phoneScreenshots/select_target_app.png" width="400">
+
+
+3) Select plugins to be enabled (optional)
+
+4) Select App to be started via Gleipnir
+
+(Now you can have a second instance of the App as well as you can connect frida and debugger, ...)
+
+
 ## Python cli
 
-[...]
+[...] (WIP)
 
 ## Library integration
 
@@ -55,9 +76,6 @@ allprojects {
    }
 ```
 
-## App usage
-
-[...]
 
 ## Build Requirements
 Android Studio: 3.6.1

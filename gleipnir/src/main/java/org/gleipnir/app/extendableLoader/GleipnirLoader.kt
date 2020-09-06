@@ -65,8 +65,8 @@ object GleipnirLoader : ILoader {
         hostActivity: Activity,
         plugins: List<IPlugin>,
         targetApplication: PackageInfo,
-        onFinish: () -> Unit,
-        profile: String
+        profile: String,
+        onFinish: () -> Unit
     ): Boolean {
         log("Loader [-] loadAndStart application $targetApplication with hostActivity $hostActivity")
         // we initialize the webview right before we start the victim App.

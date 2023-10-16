@@ -23,7 +23,7 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
-apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'com.github.dcendents.android-maven'
 
 group = 'com.github.ChickenHook'
 
@@ -67,7 +67,7 @@ android {
     externalNativeBuild {
         cmake {
             path "CMakeLists.txt"
-            version "3.6.0"
+            ndkVersion "21.4.7075529"
         }
     }
 }
